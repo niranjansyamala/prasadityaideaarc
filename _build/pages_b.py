@@ -83,6 +83,8 @@ def doc_row(title, desc, status, kind, action=""):
             f'<span style="font-size: 14px; color: #5F6673">{desc}</span></span>'
             f'<span style="display: flex; align-items: center; gap: 10px">{chip(status, kind)}{action}</span></li>')
 
+ON_FILING = "On filing of the DRHP"  # counsel: these go live only on the DRHP filing date
+
 def doc_list(rows):
     return '<ul style="margin: 0; padding: 0; list-style: none; border: 1px solid #E3E1D9; border-bottom: 0; border-radius: 2px; background: #FFFFFF">' + "".join(rows) + "</ul>"
 
@@ -92,12 +94,13 @@ investors = (
          "offering, kept in one place and published as they are filed.",
          f'<div class="in in-4" style="display: flex; flex-wrap: wrap; gap: 12px; padding-top: 8px">{btn("Ipo.dc.html", "About the proposed offering")}'
          f'{btn("#grievance", "Investor grievances", "btn-ow")}</div>')
-    + subnav([("drhp", "DRHP"), ("restated", "Restated financials"), ("reports", "Annual reports"), ("governance", "Governance"),
+    + subnav([("drhp", "DRHP"), ("restated", "Restated financials"), ("offer-docs", "Material creditors and industry report"),
+              ("reports", "Annual reports"), ("group", "Group companies"), ("governance", "Governance"),
               ("shareholders", "Shareholders"), ("grievance", "Grievance redressal")])
     + section(
         f'<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr)); gap: 32px 72px; align-items: start">'
         f'<div style="display: flex; flex-direction: column; gap: 16px">{h2("Draft Red Herring Prospectus", "drhp-h")}'
-        + p("The DRHP will be hosted here, with the disclaimer prescribed by legal counsel, once it is filed with SEBI and the stock exchanges. "
+        + p("The DRHP will be hosted here, with the prescribed disclaimer, once it is filed with SEBI and the stock exchanges. "
             "Visitors will be asked to confirm they have read the disclaimer before the document opens.") + "</div>"
         + f'<div style="display: flex; flex-direction: column; gap: 10px; padding: 28px; background: #152238; border-radius: 2px; border-top: 3px solid #E3B42A">'
         + label("Status", "#E3B42A") + f'<span style="font-family: {F_SERIF}; font-weight: 600; font-size: 28px; color: #FFFFFF">Not yet filed</span>'
@@ -107,17 +110,28 @@ investors = (
         + f'<dt style="font-weight: 700; color: #FFFFFF">Book running lead managers</dt><dd style="margin: 0">[—]</dd>'
         + f'<dt style="font-weight: 700; color: #FFFFFF">Registrar to the offer</dt><dd style="margin: 0">[—]</dd></dl></div></div>',
         id_="drhp", label_id="drhp-h")
-    + section(head_block("Restated financial information", "Restated consolidated financial information for the periods covered by the offer document, with the auditors' examination report.", "restated-h")
-              + doc_list([doc_row("Restated financial information", "For the three financial years and any stub period in the offer document", "With the DRHP", "soon"),
-                          doc_row("Examination report of the statutory auditors", "On the restated financial information", "With the DRHP", "soon"),
-                          doc_row("Audited financial statements of the company", "Standalone, for the last three financial years", "With the DRHP", "soon")]),
+    + section(head_block("Restated financial information", "Restated Financial Information of the company for the periods covered by the Draft Red Herring Prospectus.", "restated-h")
+              + doc_list([doc_row("Restated Financial Information",
+                                  "As at and for the three months ended June 30, 2026 and for the financial years ended March 31, 2026, March 31, 2025 and March 31, 2024",
+                                  ON_FILING, "soon")]),
               bg="#F7F5EF", id_="restated", label_id="restated-h", gap=32)
-    + section(head_block("Annual reports and audited statements", "Every annual report since 2008-09, with extracts of the annual return.", "reports-h", ("Financials.dc.html", "All annual reports"))
-              + doc_list([doc_row("Annual report 2025-26", "Directors' report, audited financial statements and auditors' report", "Published", "on", pdf("PDF", "Financials.dc.html#reports")),
-                          doc_row("Annual report 2024-25", "Directors' report, audited financial statements and auditors' report", "Published", "on", pdf("PDF", "Financials.dc.html#reports")),
-                          doc_row("Annual return extract 2025-26", "Form MGT-7 under Section 92 of the Companies Act, 2013", "Published", "on", pdf("PDF", "Financials.dc.html#reports"))]),
-              id_="reports", label_id="reports-h", gap=32)
-    + section(head_block("Corporate governance", "The board, its committees, and the policies a listed company is required to publish.", "gov-h", ("Governance.dc.html", "Governance and policies"))
+    + section(head_block("Other offer-related documents", "Published with the Draft Red Herring Prospectus.", "offer-h")
+              + doc_list([doc_row("Outstanding overdues to material creditors",
+                                  "Names of the material creditors and the amounts involved, as at June 30, 2026", ON_FILING, "soon"),
+                          doc_row("Industry report", PH("[Title of the report, issuing agency and date]"), ON_FILING, "soon")]),
+              id_="offer-docs", label_id="offer-h", gap=32)
+    + section(head_block("Annual reports and audited statements", "Annual reports and audited financial statements of the company for the preceding three financial years.", "reports-h", ("Financials.dc.html", "All annual reports"))
+              + doc_list([doc_row(f"Annual report {y}", "Directors' report, audited financial statements and auditors' report", ON_FILING, "soon")
+                          for y in ("2025-26", "2024-25", "2023-24")]),
+              bg="#F7F5EF", id_="reports", label_id="reports-h", gap=32)
+    + section(head_block("Group companies", "Audited financial statements of each Group Company for the preceding three financial years, with the particulars below.", "group-h")
+              + f'<div style="display: flex; flex-direction: column; gap: 16px">{h3("[Name of Group Company]", color="#8A8A8A")}'
+              + table(["Financial year", "Reserves (excluding revaluation reserve)", "Sales", "Profit after tax", "Earnings per share", "Diluted earnings per share", "Net asset value", "Audited financial statements"],
+                      [[y] + [PH("[—]")] * 6 + [pdf("PDF")] for y in ("2025-26", "2024-25", "2023-24")], 980, (0, 7))
+              + "</div>"
+              + note("One table for each Group Company identified in the DRHP. Remove this section if the DRHP identifies none."),
+              id_="group", label_id="group-h", gap=32)
+    + section(head_block("Corporate governance", "The members of the board and of each committee, and the company's corporate governance policies.", "gov-h", ("Governance.dc.html", "Governance and policies"))
               + grid([ruled("Board and committees", "Composition of the board and of each committee, with terms of reference.", more("Governance.dc.html#committees", "Committees")),
                       ruled("Policies", "Fair Practice Code, grievance redressal, related-party transactions and the other policies.", more("Governance.dc.html#policies", "Policies")),
                       ruled("Codes of conduct", "For directors and senior management, and for the prevention of insider trading.", more("Governance.dc.html#codes", "Codes"))]),
@@ -197,7 +211,7 @@ pol = lambda t, d, live: (t, d, chip("Published", "on") if live else chip("To be
 
 governance = (
     hero(crumbs(("Investor Relations", "Investors.dc.html"), ("Corporate governance", None)), "Corporate governance",
-         "An independent board, committees with defined terms of reference, and published policies covering how we deal with borrowers, "
+         "The board, its committees and their terms of reference, and the policies covering how we deal with borrowers, "
          "investors, employees and related parties.")
     + subnav([("board", "Board"), ("committees", "Committees"), ("policies", "Policies"), ("codes", "Codes of conduct")])
     + section(head_block("Board composition", "Led by an independent chairperson, Koteswara Rao SSR.", "board-h", ("Leadership.dc.html", "Board and management"))

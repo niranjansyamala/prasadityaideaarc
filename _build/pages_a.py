@@ -9,7 +9,7 @@ timeline = [
     ("March 2007", "Incorporated in Hyderabad",
      "Pridhvi Asset Reconstruction and Securitisation Company Limited (PARAS) is incorporated, CIN U67120TG2007PLC053327."),
     ("9 April 2008", "Registered with the Reserve Bank of India",
-     "Registered under Section 3 of the SARFAESI Act, 2002, the first asset reconstruction company licensed in South India."),
+     "Registered as an asset reconstruction company under Section 3 of the SARFAESI Act, 2002."),
     ("2008-09", "First annual report",
      "The first full year of acquisitions from banks and financial institutions. An annual report has been published every year since."),
     (PH("[Year]"), "Partners in equity",
@@ -18,8 +18,6 @@ timeline = [
      "The company takes the name of its promoter group."),
     ("24 April 2026", "Fresh Certificate of Registration",
      "The Reserve Bank of India issues a fresh Certificate of Registration in the new name."),
-    ("2026-27", "Proposed public offering",
-     "Preparation for a public offering of equity shares. Documents will be published in Investor Relations as they are filed."),
 ]
 tl_html = "".join(
     f'<li class="tl"><span class="tl-dot" aria-hidden="true"></span>'
@@ -33,22 +31,21 @@ partners = "".join(
                  ("17c87ac57c49afd229130b5ad67e6d46.png", "UCO Bank"), ("cfbdea6c98d53cfee8d386550cb27748.png", "Zen Money")])
 
 about = (
-    hero(crumbs(("About", None)), "Eighteen years of turning stressed loans back into value.",
+    hero(crumbs(("About", None)), "About Prasaditya ARC",
          "Prasaditya ARC Limited, formerly Pridhvi Asset Reconstruction and Securitisation Company Limited (PARAS), "
-         "was the first asset reconstruction company licensed in South India. We buy non-performing loans from banks and "
-         "financial institutions and work each one to the best available resolution.")
+         "is an asset reconstruction company registered with the Reserve Bank of India. We buy non-performing loans from banks and "
+         "financial institutions and work each one to resolution.")
     + subnav([("who", "Who we are"), ("history", "History"), ("group", "Prasaditya Group"), ("partners", "Partners in equity"), ("registration", "Registration")])
     + section(
         f'<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr)); gap: 32px 72px; align-items: start">'
         f'<div style="display: flex; flex-direction: column; gap: 16px">{h2("Who we are", "who-h")}'
         + p("An asset reconstruction company exists so that lenders do not have to become specialists in recovery. We take non-performing "
-            "loans off the books of banks and financial institutions, hold them in trusts funded by security receipts, and do the patient work "
+            "loans off the books of banks and financial institutions, hold them in trusts funded by security receipts, and do the work "
             "of restructuring, settlement, revival or, where it is the only route, enforcement and sale.")
-        + p("We are headquartered in Hyderabad and regulated by the Reserve Bank of India. Our board and management are drawn largely from the "
-            "recovery and legal functions of India's public-sector banks.")
+        + p("We are headquartered in Hyderabad and regulated by the Reserve Bank of India.")
         + more("Business.dc.html", "How our business works") + "</div>"
         + grid([ruled("Our purpose", "Creating value through the revival and reconstruction of impaired assets."),
-                ruled("How we work", "Every account is worked towards the outcome that recovers the most, and every secured asset we sell goes through a public e-auction."),
+                ruled("How we work", "Accounts are resolved through restructuring, settlement, revival or enforcement, and secured assets are sold through public e-auctions."),
                 ruled("Who we answer to", "Holders of security receipts, our shareholders, and the Reserve Bank of India, under the SARFAESI Act, 2002.")], 220, "32px 32px")
         + "</div>", id_="who", label_id="who-h")
     + section(head_block("History", "From incorporation in 2007 to a fresh registration in a new name in 2026.", "history-h")
@@ -59,16 +56,10 @@ about = (
         f'<div style="display: flex; flex-wrap: wrap; gap: 32px 64px; align-items: center">'
         f'<img src="./assets/7dcde562336d4a72872a647d4a2b5a9d.png" alt="Prasaditya Group" style="height: 170px; width: auto; max-width: 100%; flex: none">'
         f'<div style="display: flex; flex-direction: column; gap: 14px; min-width: 0; flex: 1 1 420px">{h2("A Prasaditya Group company", "group-h")}'
-        + p("Prasaditya ARC is promoted by the Prasaditya Group, headquartered in Hyderabad, which has promoted more than 35 companies in "
-            "16 countries and employs over 20,000 people in India and abroad.", extra="max-width: 760px")
+        + p("Prasaditya ARC is promoted by the Prasaditya Group, headquartered in Hyderabad.", extra="max-width: 760px")
         + p("The group's chief promoter and chairperson, M. Siva Rama Vara Prasad, is Promoter Director of the company.", extra="max-width: 760px")
         + more("Leadership.dc.html", "Board and management") + "</div></div>"
-        + f'<dl style="margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 40px; padding-top: 40px; border-top: 1px solid #D6D3C9">'
-        + "".join(f'<div style="display: flex; flex-direction: column; gap: 8px"><span class="rule" aria-hidden="true"></span>'
-                  f'<dt style="font-family: {F_SANS}; font-weight: 700; font-size: 13px; color: #5F6673">{k}</dt>'
-                  f'<dd style="margin: 0; font-family: {F_SERIF}; font-weight: 600; font-size: clamp(36px, 3.6vw, 52px); line-height: 1.05; color: #152238">{v}</dd></div>'
-                  for k, v in [("Companies promoted", "35+"), ("Countries", "16"), ("People employed", "20,000+"), ("Years in asset reconstruction", "18")])
-        + "</dl>", id_="group", label_id="group-h")
+        , id_="group", label_id="group-h")
     + section(h2("Our partners in equity", "partners-h", center=True)
               + p("Shareholders in Prasaditya ARC alongside the promoter group.", extra="text-align: center; max-width: 640px; margin-inline: auto")
               + f'<ul style="list-style: none; margin: 0; padding: 0; width: 100%; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr)); gap: 24px; align-items: center">{partners}</ul>',
@@ -100,7 +91,7 @@ def person(name, role, bio, img=None, initials=None, placeholder=False):
 
 board = [
     person("M. Siva Rama Vara Prasad", "Promoter Director",
-           "Chief promoter and chairperson of the Prasaditya Group. Recipient of UNIDO's award for the most successful and innovative entrepreneur in 1996 and two Assocham awards in 2017.",
+           "Chief promoter and chairperson of the Prasaditya Group.",
            "96f8921ea57c17ccfef9e05d0d9219d0.png"),
     person("Koteswara Rao SSR", "Chairperson and Independent Director",
            "Fellow of the Institute of Chartered Accountants of India and senior partner at Brahmayya &amp; Co., Hyderabad. Former President of the Federation of Andhra Pradesh Chambers of Commerce and Industry.",
@@ -122,10 +113,9 @@ mgmt = [
 ]
 leadership = (
     hero(crumbs(("Leadership", None)), "Board and management",
-         "Led by the chairperson of the Prasaditya Group, with an independent board of former bankers, civil servants and professionals, "
-         "and a management team drawn from the recovery and legal functions of India's public-sector banks.")
+         "The board of directors and the management team of Prasaditya ARC Limited.")
     + subnav([("board", "Board of directors"), ("management", "Management"), ("committees", "Board committees")])
-    + section(head_block("Board of directors", "The board includes former executives of Indian Bank, Union Bank of India, Canara Bank and Syndicate Bank.", "board-h")
+    + section(head_block("Board of directors", None, "board-h")
               + grid(board, 300) + note("Grey entries are placeholders for directors whose details are to be added."),
               id_="board", label_id="board-h")
     + section(head_block("Management", "The people who run acquisitions, resolution, finance and compliance day to day.", "mgmt-h")
@@ -160,8 +150,8 @@ audience = lambda t, who, items, cta: (
 
 business = (
     hero(crumbs(("Business", None)), "What we do with a stressed loan",
-         "We acquire non-performing financial assets from banks and financial institutions, resolve each account towards the outcome that "
-         "recovers the most, and return the proceeds to the holders of security receipts.")
+         "We acquire non-performing financial assets from banks and financial institutions, resolve each account, "
+         "and return the proceeds to the holders of security receipts.")
     + subnav([("model", "Business model"), ("resolution", "Ways to resolve"), ("work", "Working with us"), ("faq", "Questions")])
     + section(
         f'<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr)); gap: 32px 72px; align-items: start">'
@@ -169,10 +159,10 @@ business = (
         + p("Banks and financial institutions carry loans that have stopped performing. An ARC takes those loans off their books and does the "
             "specialist work of recovering value from them, so lenders can return to lending.") + "</div>"
         + numbered([("Acquisition.", "We acquire non-performing financial assets from banks and financial institutions, individually or as portfolios, funded through security receipts issued to qualified investors."),
-                    ("Resolution.", "Each account is worked towards the outcome that recovers the most: restructuring the debt, a negotiated settlement, revival of the business, or enforcement of security under the SARFAESI Act and the insolvency code."),
-                    ("Realisation.", "Secured assets are sold through transparent public e-auctions, and recoveries are passed back to the holders of security receipts.")])
+                    ("Resolution.", "Each account is worked towards resolution: restructuring the debt, a negotiated settlement, revival of the business, or enforcement of security under the SARFAESI Act and the insolvency code."),
+                    ("Realisation.", "Secured assets are sold through public e-auctions, and recoveries are passed back to the holders of security receipts.")])
         + "</div>" + flow, id_="model", label_id="model-h", gap=44)
-    + section(head_block("Ways to resolve an account", "There is no single route. We choose the one that recovers the most for security-receipt holders while treating the borrower fairly.", "res-h")
+    + section(head_block("Ways to resolve an account", "An account may be resolved through any of the routes below, depending on its circumstances.", "res-h")
               + grid([ruled("Restructuring", "Rescheduling repayments or changing the terms of the debt where the underlying business can carry it."),
                       ruled("Settlement", "A negotiated one-time settlement with the borrower or guarantors, in line with our board-approved policy."),
                       ruled("Revival", "Supporting a change in management, fresh funding or a sale of the business as a going concern."),
